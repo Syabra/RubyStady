@@ -18,23 +18,35 @@ def boom
     diff = rand(1..200)
     if luck?
         @machines -= diff
-        puts "#{diff} машин уничтожено"
+        puts "- #{diff} машин уничтожено"
     else
         @humans -= diff
-        puts "#{diff} людей погибло"
+        puts "- #{diff} людей погибло"
+    end
+end
+
+# Метод воспроизводит потери сторон
+def reproduction
+    diff = rand(1..200)
+    if luck?
+        @machines += diff
+        puts "+ #{diff} машин в строю прибыло"
+    else
+        @humans += diff
+        puts "+ #{diff} сопротивление пополнило ряды"
     end
 end
 
 # Метод возввращает случайное названое города
 def random_city
-    dice = rand(1..5)
-    if dice == 1
+    case dice = rand(1..5)
+    when 1
         'Москва'
-    elsif dice == 2
+    when 2
         'Лос-Анджелес'
-    elsif dice == 3
+    when 3
         'Пекин'
-    elsif dice == 4
+    when 4
         'Лондон'
     else
         'Сеул'
@@ -74,12 +86,31 @@ def event3
     boom
 end
 
+def event4
+    puts "Терминатор отправлен в прошлое #{random_city}"
+    random_sleep
+    boom
+end
+
+def event5
+    puts "Празднование дня Святого Патрика!!!"
+    random_sleep
+    reproduction
+    reproduction
+end
+
+def event6
+    puts "В полку #{random_city} прибыло"
+    random_sleep
+    reproduction
+end
+
 ###########################
 # Проверка победы
 ###########################
 
 def check_victory?
-    false
+    true if @humans <= 0 || @machines <= 0
 end
 
 ###########################
@@ -87,15 +118,23 @@ end
 ###########################
 loop do
     if check_victory?
-    exit
+        puts "\nПротивостояние окончилось!"
+        exit
     end
-    dice = rand(1..3)
-    if dice == 1
-    event1
-    elsif dice == 2
-    event2
-    elsif dice == 3
-    event3
+
+    case dice = rand(1..6)
+    when 1 
+        event1
+    when 2 
+        event2
+    when 3 
+        event3
+    when 4 
+        event4
+    when 5 
+        event5
+    when 6 
+        event6
     end
     stats
     random_sleep
