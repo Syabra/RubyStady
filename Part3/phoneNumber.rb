@@ -41,13 +41,8 @@ puts 'Введите номер телефона: '
 phone = gets.to_s.chomp
 @number = Array.new(phone.size)
 
-
-
 phone_to_number(phone)
 puts 'Транслированный номер: '
 
-@number.each do |value|
-    print value
-end
-
+@number.each {|a| print a}
 puts "\n"
