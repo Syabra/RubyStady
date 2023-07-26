@@ -2,7 +2,7 @@
 
 print "(R)ock, (S)cissors, (P)aper?  "
 s = gets.strip.capitalize
-arr = Array.new [:R, :S, :P]
+arr = Array.new [:Rock, :Scissors, :Paper]
 
 if s == 'R'
     yourChoise = arr[0] 
