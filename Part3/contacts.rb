@@ -29,6 +29,8 @@ contactHash = {
     }
 }
 
+contactHash.default = 'Контакт отсутствует'
+
 print 'Веведите имя: '
 name = gets.strip
 
