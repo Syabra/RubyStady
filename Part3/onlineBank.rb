@@ -41,15 +41,17 @@ cart = {
  приход, если переключатель включен.
 =end
 
-if cart[:visibility_filter] == :income
-    puts 'income - true'
-else
-    puts 'income - false'
-end
-
-
 if cart[:visibility_filter] == :show_all
-    puts 'xXx'
+    puts cart
 else
     puts 'show_all - false'
+end
+
+cart[:visibility_filter] = :income
+puts "\n visility_filter = :income \n\n"
+
+if cart[:visibility_filter] == :income
+    cart.each {|cart_item| puts cart_item[:listOfTranzaktion]}
+else
+    puts 'income - false'
 end
