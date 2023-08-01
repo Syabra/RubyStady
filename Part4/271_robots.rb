@@ -30,10 +30,11 @@ class Robot
   end
 
   def label
-    "*"
+    '*'
   end
 end
 
+# Класс собаки
 class Dog
   # Акцессоры — чтобы можно было узнать координаты снаружи
   attr_accessor :x, :y, :num
@@ -50,18 +51,16 @@ class Dog
     self.x += 2 if x < 12
   end
 
-  def left
-  end
+  def left; end
 
-  def up
-  end
+  def up; end
 
   def down
     self.y -= 2 if y > -12
   end
 
   def label
-    "@"
+    '@'
   end
 end
 
@@ -83,10 +82,9 @@ commander = Commander.new
 arr = Array.new(10) { Robot.new }
 # ...и одной собаки. Т.к. собака реализует точно такой же интерфейс,
 # все объекты в массиве «как будто» одного типа.
-arr.push(Dog.new(x: -12, y: 12))
-arr.push(Dog.new(x: -11, y: 12))
-arr.push(Dog.new(x: -12, y: 11))
-
+3.times do
+  arr.push(Dog.new(x: -12, y: 12))
+end
 # В бесконечном цикле (для остановки программы нажмите ^C)
 loop do
   # Хитрый способ очистить экран
@@ -96,35 +94,32 @@ loop do
   12.downto(-12) do |y|
     -12.upto(12) do |x|
       # Проверяем, есть ли у нас в массиве кто-то с координатами x и y.
-      # Заменили «any?» на «find» и записали результат в переменную
-      somebody = arr.find { |somebody| somebody.x == x && somebody.y == y }
+      somebody = arr.find { |somb| somb.x == x && somb.y == y }
       # Если найден, рисуем звездочку, иначе точку
       if somebody
         # Рисуем что-то, «*» или «@», но что это — мы не знаем!
         print somebody.label
       else
-        print "."
+        print '.'
       end
     end
     # Просто переводим строку:
     puts
   end
 
-  # Проверка столкновения. Если есть два объекта с одинаковыми
-  # координатами и их «label» не равны, то, значит, робот поймал собаку.
   game_over = arr.combination(2).any? do |a, b|
     a.x == b.x && a.y == b.y && a.label != b.label
   end
   if game_over
-    puts "Game over"
+    puts 'Game over'
     exit
   end
 
-  game_over = arr.combination(3).any? do |a, b, c|
+  win = arr.combination(3).any? do |a, b, c|
     a.x == 12 && b.x == 12 && c.x == 12 && a.y == -12 && b.y == -12 && c.y == -12
   end
-  if game_over
-    puts "-=  Win!!!  =-"
+  if win
+    puts '-=  Win!!!  =-'
     exit
   end
   # Каждого робота двигаем в случайном направлении
