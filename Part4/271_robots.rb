@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
-# Класс робота
-class Robot
-  # Акцессоры — чтобы можно было узнать координаты снаружи
-  attr_accessor :x, :y, :num
+# Обобщённый класс игрока
+class Player
+  attr_accessor :x, :y
 
-  # Конструктор, принимает хеш. Если не задан — будет пустой хеш.
-  # В хеше мы ожидаем два параметра — начальные координаты робота,
-  # если не заданы, будут по умолчанию равны нулю.
   def initialize(options = {})
     @x = options[:x] || 0
     @y = options[:y] || 0
@@ -28,32 +24,21 @@ class Robot
   def down
     self.y -= 1
   end
-
+end
+# Класс робота
+class Robot < Player
+  
   def label
     '*'
   end
 end
 
 # Класс собаки
-class Dog
-  # Акцессоры — чтобы можно было узнать координаты снаружи
-  attr_accessor :x, :y, :num
-
-  # Конструктор, принимает хеш. Если не задан — будет пустой хеш.
-  # В хеше мы ожидаем два параметра — начальные координаты робота,
-  # если не заданы, будут по умолчанию равны нулю.
-  def initialize(options = {})
-    @x = options[:x] || 0
-    @y = options[:y] || 0
-  end
-
+class Dog < Player
+  
   def right
     self.x += 2 if x < 12
   end
-
-  def left; end
-
-  def up; end
 
   def down
     self.y -= 2 if y > -12
