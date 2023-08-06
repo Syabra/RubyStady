@@ -7,7 +7,7 @@ def random_pow
 end
 
 def pow_arg(arg)
-    binding.pry
+    # binding.pry
     arg**2
 end
 
