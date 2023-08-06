@@ -1,0 +1,5 @@
+POST /login HTTP/1.0
+Content-length: 30
+
+
+username=admin&password=secret

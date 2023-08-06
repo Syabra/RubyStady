@@ -10,6 +10,6 @@ File.new('passwords.txt').each do |line|
     puts "Trying #{password}..."
     unless res.body.include?('Wrong')
         puts "Password found: -=  #{password}  =-"
-        exit
+        File.open('post.txt', 'a') { |f| f.write "username=admin&password=#{password}" }
     end
 end
