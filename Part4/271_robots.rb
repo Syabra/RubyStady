@@ -25,9 +25,9 @@ class Player
     self.y -= 1
   end
 end
+
 # Класс робота
 class Robot < Player
-  
   def label
     '*'
   end
@@ -35,7 +35,6 @@ end
 
 # Класс собаки
 class Dog < Player
-  
   def right
     self.x += 2 if x < 12
   end
